@@ -1,14 +1,14 @@
 <?php
 
  // Login to the database
-$pseudo = addslashes($_POST['pseudo']);
-$message = addslashes( $_POST['message']);
+$pseudo = addslashes(strip_tags($_POST['pseudo']));
+$message = addslashes(strip_tags( $_POST['message']));
 
 try
 
 {
 
-    $bdd = new PDO('mysql:host=localhost;dbname=mini-chat;charset=utf8', 'root', 'w');
+    $bdd = new PDO('mysql:host=localhost;dbname=mini-chat;charset=utf8', 'root', '');
 
 }
 
