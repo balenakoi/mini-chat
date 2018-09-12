@@ -23,9 +23,13 @@ catch(Exception $e)
 
 // Inserting the message using a prepared query
 if(!empty($pseudo) AND !empty($message)){
- $bdd->exec("INSERT INTO minichat (pseudo, message) VALUES('$pseudo','$message')");
-
-}
+ // $bdd->exec("INSERT INTO minichat (pseudo, message) VALUES('$pseudo','$message')");
+ $req = $bdd->prepare('INSERT INTO minichat (pseudo, message) VALUES (:pseudo, :message )');
+  $req->execute(array(
+  'pseudo' => $pseudo,
+  'message' => $message
+));
+ }
 
   // Redirecting the visitor to the minichat page
   header('Location: minichat.php');
