@@ -13,27 +13,27 @@
 
 <?php
  // <!-- Login to the database -->
-
+include("../password1/password.php");
 try {
-  $bdd = new PDO('mysql:host=localhost;dbname=mini-chat;charset=utf8', 'root', '');
+  $bdd = new PDO('mysql:host=localhost;dbname=mini-chat;charset=utf8', 'root', $password);
 
 } catch (Exception $e) {
-        die('Erruer : '.$e->getMessage());
+  die('Erruer : ' . $e->getMessage());
 
 }
 
   // <!-- Retrieve the last 10 messages -->
-  $reponse = $bdd->query('SELECT * FROM minichat ORDER BY ID DESC LIMIT 0,10');
+$reponse = $bdd->query('SELECT * FROM minichat ORDER BY ID DESC LIMIT 0,10');
 
 
   // <!-- Display of each message (all data is protected by htmlspecialchars) -->
 
-  while ($donnees = $reponse->fetch()) {
-    echo '<p><strong>' . htmlspecialchars($donnees['pseudo']).  '</strong>  : ' . htmlspecialchars($donnees['message']) . '</p>';
-  }
+while ($donnees = $reponse->fetch()) {
+  echo '<p><strong>' . htmlspecialchars($donnees['pseudo']) . '</strong>  : ' . htmlspecialchars($donnees['message']) . '</p>';
+}
 
- $reponse->closecursor();
+$reponse->closecursor();
 
-  ?>
+?>
   </body>
 </html>
